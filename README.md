@@ -1,4 +1,3 @@
-# social-network-api
 # Social Network API
   ## Description
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
