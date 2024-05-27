@@ -36,7 +36,25 @@ const userController = {
     }
   },
   // update a user
-  async updateUser(req, res) {},
+  async updateUser(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $set: { username: req.body.username, email: req.body.email }},
+        { runValidators: true, new: true }
+      );
+
+      if (!user) {
+        return res
+          .status(404)
+          .json({ message: 'No user found with that ID :(' });
+      }
+
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
   // delete user (BONUS: and delete associated thoughts)
   async deleteUser(req, res) {
     try {
