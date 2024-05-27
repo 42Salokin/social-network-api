@@ -65,6 +65,10 @@ const userController = {
       }
 
       await Thought.deleteMany({ _id: { $in: user.thoughts } });
+      await User.updateMany(
+        { friends: req.params.userId },
+        { $pull: { friends: req.params.userId } }
+      );
       res.json({ message: 'User and associated thoughts deleted!' })
     } catch (err) {
       res.status(500).json(err);
